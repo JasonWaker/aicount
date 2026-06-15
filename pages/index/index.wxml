@@ -1,0 +1,90 @@
+<view class="page">
+  <view class="nav-shell" style="{{navShellStyle}}">
+    <view class="nav-content" style="{{navContentStyle}}">
+      <view class="brand">
+        <view class="brand-icon" aria-hidden="true"></view>
+        <text class="brand-title">AI倒数日</text>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class="content" scroll-y enhanced show-scrollbar="{{false}}" style="padding-top: {{contentTop}}px;">
+    <view class="intro">
+      <text class="intro-copy">记录重要时刻，让等待更有意义</text>
+    </view>
+
+    <view class="hero-card">
+      <image class="hero-image" src="/assets/lantern.jpg" mode="aspectFill"></image>
+      <view class="hero-shade"></view>
+      <view class="hero-body">
+        <view class="hero-top">
+          <text class="pin-chip">置顶</text>
+          <text class="star">★</text>
+        </view>
+        <view class="hero-main">
+          <text class="hero-title">2026年春节</text>
+          <view class="hero-count">
+            <text class="hero-number">{{mainDaysLeft}}</text>
+            <text class="hero-unit">天后</text>
+          </view>
+          <view class="hero-date">
+            <view class="date-icon"></view>
+            <text>2026年2月17日</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-head">
+      <text class="section-title">近期重要节日</text>
+      <button class="section-link tap-target" bindtap="handleViewAll">查看全部</button>
+    </view>
+
+    <view class="event-list">
+      <view class="event-card" wx:for="{{events}}" wx:key="id" hover-class="event-card-active" hover-stay-time="80">
+        <view class="event-main">
+          <view class="event-icon {{item.featured ? 'event-icon-featured' : ''}}">
+            <view class="event-symbol event-symbol-{{item.icon}}"></view>
+          </view>
+          <view class="event-copy">
+            <text class="event-title">{{item.title}}</text>
+            <text class="event-date">{{item.dateText}}</text>
+          </view>
+        </view>
+        <view class="event-count">
+          <text class="event-number {{item.featured ? 'event-number-featured' : ''}}">{{item.daysLeft}}</text>
+          <text class="event-unit">天</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-hint">
+      <view class="empty-icon">
+        <view class="empty-line empty-line-one"></view>
+        <view class="empty-line empty-line-two"></view>
+        <view class="empty-line empty-line-three"></view>
+      </view>
+      <text class="empty-text">向下滑动发现更多灵感</text>
+    </view>
+  </scroll-view>
+
+  <button class="fab tap-target" bindtap="handleAddCountdown" hover-class="fab-active">
+    <text class="fab-icon">+</text>
+    <text>添加我的倒数日</text>
+  </button>
+
+  <view class="tabbar">
+    <view class="tab-item tab-active">
+      <view class="tab-icon tab-home"><view class="tab-home-door"></view></view>
+      <text>首页</text>
+    </view>
+    <view class="tab-item">
+      <view class="tab-icon tab-book"></view>
+      <text>倒数本</text>
+    </view>
+    <view class="tab-item">
+      <view class="tab-icon tab-user"></view>
+      <text>我的</text>
+    </view>
+  </view>
+</view>

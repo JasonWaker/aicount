@@ -1,0 +1,9 @@
+{
+  "desc": "AI countdown sitemap",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}
