@@ -2,6 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/create/create",
+    "pages/category-select/category-select",
+    "pages/date-select/date-select",
+    "pages/reminder-select/reminder-select",
     "pages/plans/plans",
     "pages/book/book",
     "pages/mine/mine"

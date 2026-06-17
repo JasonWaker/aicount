@@ -1,0 +1,116 @@
+<view class="page">
+  <view class="mock-page">
+    <view class="nav-shell" style="{{navShellStyle}}">
+      <view class="nav-action nav-back" style="{{navActionStyle}}">
+        <image class="nav-icon" src="/assets/icons/chevron-left.svg" mode="aspectFit"></image>
+      </view>
+      <view class="nav-title" style="{{navActionStyle}}">
+        <text>新建时刻</text>
+      </view>
+    </view>
+
+    <view class="content" style="padding-top: {{contentTop}}px;">
+      <view class="ai-card">
+        <view class="ai-icon-wrap">
+          <image class="ai-icon" src="/assets/icons/auto-awesome-primary.svg" mode="aspectFit"></image>
+        </view>
+        <view class="ai-copy">
+          <text class="ai-title">AI 智能创建</text>
+          <text class="ai-subtitle">描述您的时刻，让 AI 为您打理一切</text>
+        </view>
+        <image class="row-chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+      </view>
+
+      <view class="section">
+        <text class="section-label">第 1 步：基本信息</text>
+        <view class="list-card">
+          <view class="form-row">
+            <text class="row-label fixed-label">事件名称</text>
+            <text class="placeholder">例如：我的生日</text>
+          </view>
+          <view class="category-block">
+            <text class="row-label">分类选择</text>
+            <view class="category-grid">
+              <view class="category-item category-active">
+                <image class="category-icon" src="/assets/icons/favorite.svg" mode="aspectFit"></image>
+                <text>生活</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/explore.svg" mode="aspectFit"></image>
+                <text>旅行</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/work.svg" mode="aspectFit"></image>
+                <text>工作</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/more-horiz.svg" mode="aspectFit"></image>
+                <text>其他</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section">
+        <text class="section-label">第 2 步：时间与备注</text>
+        <view class="list-card">
+          <view class="form-row row-between">
+            <text class="row-label">目标日期</text>
+            <view class="row-value">
+              <text class="primary-value">2024年12月25日</text>
+              <image class="small-icon" src="/assets/icons/calendar-month.svg" mode="aspectFit"></image>
+            </view>
+          </view>
+          <view class="note-row">
+            <text class="row-label">备注</text>
+            <text class="note-placeholder">记录下这一刻的期待...</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="section">
+        <text class="section-label">第 3 步：偏好设置</text>
+        <view class="list-card">
+          <view class="form-row row-between">
+            <text class="row-label">置顶此事件</text>
+            <view class="mock-switch">
+              <view class="switch-thumb"></view>
+            </view>
+          </view>
+          <view class="form-row row-between">
+            <text class="row-label">定期提醒</text>
+            <view class="row-value muted-value">
+              <text>无</text>
+              <image class="small-icon" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overlay"></view>
+
+  <view class="reminder-sheet">
+    <view class="sheet-handle"></view>
+    <view class="sheet-head">
+      <text class="sheet-title">定期提醒</text>
+      <view class="close-button" bindtap="handleBack" hover-class="tap-press">
+        <image class="close-icon" src="/assets/icons/close.svg" mode="aspectFit"></image>
+      </view>
+    </view>
+
+    <view class="option-list">
+      <view class="option-row {{selectedReminder === item.id ? 'option-active' : ''}}" wx:for="{{reminderOptions}}" wx:key="id" data-id="{{item.id}}" bindtap="handleSelect" hover-class="row-press">
+        <text class="option-label">{{item.label}}</text>
+        <image wx:if="{{selectedReminder === item.id}}" class="option-icon" src="/assets/icons/check-circle-primary.svg" mode="aspectFit"></image>
+        <image wx:else class="option-icon" src="/assets/icons/radio-button-unchecked.svg" mode="aspectFit"></image>
+      </view>
+    </view>
+
+    <view class="sheet-footer">
+      <button class="confirm-button" bindtap="handleConfirm" hover-class="button-press">确定</button>
+    </view>
+  </view>
+</view>

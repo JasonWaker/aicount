@@ -46,10 +46,10 @@
     <view class="section">
       <text class="section-label">第 2 步：时间与备注</text>
       <view class="list-card">
-        <view class="form-row row-between" hover-class="row-press">
+        <view class="form-row row-between" bindtap="handleOpenDatePicker" hover-class="row-press">
           <text class="row-label">目标日期</text>
           <view class="row-value">
-            <text class="primary-value">2024年12月25日</text>
+            <text class="primary-value">{{targetDateText}}</text>
             <image class="small-icon" src="/assets/icons/calendar-month.svg" mode="aspectFit"></image>
           </view>
         </view>
@@ -69,10 +69,10 @@
             <view class="switch-thumb"></view>
           </view>
         </view>
-        <view class="form-row row-between" hover-class="row-press">
+        <view class="form-row row-between" bindtap="handleOpenReminderPicker" hover-class="row-press">
           <text class="row-label">定期提醒</text>
           <view class="row-value muted-value">
-            <text>无</text>
+            <text>{{reminderText}}</text>
             <image class="small-chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
           </view>
         </view>

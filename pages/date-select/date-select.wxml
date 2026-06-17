@@ -1,0 +1,112 @@
+<view class="page">
+  <view class="mock-page">
+    <view class="nav-shell" style="{{navShellStyle}}">
+      <view class="nav-action nav-back" style="{{navActionStyle}}">
+        <image class="nav-icon" src="/assets/icons/chevron-left.svg" mode="aspectFit"></image>
+      </view>
+      <view class="nav-title" style="{{navActionStyle}}">
+        <text>新建时刻</text>
+      </view>
+    </view>
+
+    <view class="content" style="padding-top: {{contentTop}}px;">
+      <view class="ai-card">
+        <view class="ai-icon-wrap">
+          <image class="ai-icon" src="/assets/icons/auto-awesome-primary.svg" mode="aspectFit"></image>
+        </view>
+        <view class="ai-copy">
+          <text class="ai-title">AI 智能创建</text>
+          <text class="ai-subtitle">描述您的时刻，让 AI 为您打理一切</text>
+        </view>
+        <image class="row-chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+      </view>
+
+      <view class="section">
+        <text class="section-label">第 1 步：基本信息</text>
+        <view class="list-card">
+          <view class="form-row">
+            <text class="row-label fixed-label">事件名称</text>
+            <text class="placeholder">例如：我的生日</text>
+          </view>
+          <view class="category-block">
+            <text class="row-label">分类选择</text>
+            <view class="category-grid">
+              <view class="category-item category-active">
+                <image class="category-icon" src="/assets/icons/favorite.svg" mode="aspectFit"></image>
+                <text>生活</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/explore.svg" mode="aspectFit"></image>
+                <text>旅行</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/work.svg" mode="aspectFit"></image>
+                <text>工作</text>
+              </view>
+              <view class="category-item">
+                <image class="category-icon" src="/assets/icons/more-horiz.svg" mode="aspectFit"></image>
+                <text>其他</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section">
+        <text class="section-label">第 2 步：时间与备注</text>
+        <view class="list-card">
+          <view class="form-row row-between">
+            <text class="row-label">目标日期</text>
+            <view class="row-value">
+              <text class="primary-value">{{selectedYear}}年{{selectedMonth}}月{{selectedDay}}日</text>
+              <image class="small-icon" src="/assets/icons/calendar-month.svg" mode="aspectFit"></image>
+            </view>
+          </view>
+          <view class="note-row">
+            <text class="row-label">备注</text>
+            <text class="note-placeholder">记录下这一刻的期待...</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overlay"></view>
+
+  <view class="date-sheet">
+    <view class="sheet-head">
+      <view class="sheet-action" bindtap="handleBack" hover-class="tap-press">
+        <text>取消</text>
+      </view>
+      <text class="sheet-title">选择日期</text>
+      <view class="sheet-action sheet-confirm" bindtap="handleConfirm" hover-class="tap-press">
+        <text>确定</text>
+      </view>
+    </view>
+
+    <view class="picker-body">
+      <view class="selection-band"></view>
+      <picker-view class="date-picker" value="{{pickerValue}}" indicator-style="height: 76rpx;" mask-style="background: transparent;" bindchange="handleDateChange">
+        <picker-view-column>
+          <view class="picker-option {{pickerValue[0] === index ? 'picker-selected' : ''}}" wx:for="{{years}}" wx:for-index="index" wx:key="*this">
+            <text>{{item}}</text>
+          </view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-option {{pickerValue[1] === index ? 'picker-selected' : ''}}" wx:for="{{months}}" wx:for-index="index" wx:key="*this">
+            <text>{{item}}月</text>
+          </view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-option {{pickerValue[2] === index ? 'picker-selected' : ''}}" wx:for="{{days}}" wx:for-index="index" wx:key="*this">
+            <text>{{item}}日</text>
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+
+    <view class="lunar-wrap">
+      <text class="lunar-chip">{{lunarText}}</text>
+    </view>
+  </view>
+</view>
