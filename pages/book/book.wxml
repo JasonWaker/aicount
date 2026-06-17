@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="nav-shell" style="{{navShellStyle}}">
+    <view class="nav-content" style="{{navContentStyle}}">
+      <text class="nav-title">倒数本</text>
+    </view>
+  </view>
+
+  <scroll-view class="content" scroll-y enhanced show-scrollbar="{{false}}" style="padding-top: {{contentTop}}px;">
+    <view class="welcome">
+      <text class="welcome-title">管理分类</text>
+      <text class="welcome-subtitle">组织您的珍贵时刻</text>
+    </view>
+
+    <view class="category-grid">
+      <view class="category-card" wx:for="{{categories}}" wx:key="id" hover-class="category-card-active" hover-stay-time="80">
+        <view class="card-top">
+          <view class="category-icon icon-{{item.tone}}">
+            <image class="icon-img" src="{{item.iconSrc}}" mode="aspectFit"></image>
+          </view>
+          <text class="count-badge">{{item.count}}</text>
+        </view>
+        <view class="category-copy">
+          <text class="category-title">{{item.title}}</text>
+          <text class="category-desc">{{item.desc}}</text>
+        </view>
+      </view>
+
+      <view class="add-card" bindtap="handleAddCategory" hover-class="add-card-active">
+        <image class="add-icon-img" src="/assets/icons/add-circle.svg" mode="aspectFit"></image>
+        <text class="add-text">新增分类</text>
+      </view>
+    </view>
+
+    <view class="stats-card">
+      <view class="stats-head">
+        <image class="stats-icon" src="/assets/icons/query-stats.svg" mode="aspectFit"></image>
+        <text class="stats-title">时间分布</text>
+      </view>
+
+      <view class="progress-row">
+        <text class="progress-label">本月已度过</text>
+        <text class="progress-value">65%</text>
+      </view>
+      <view class="progress-track">
+        <view class="progress-fill"></view>
+      </view>
+    </view>
+
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+
+  <view class="tabbar">
+    <view class="tab-item" bindtap="handleTabHome" hover-class="tab-press">
+      <image class="tab-icon-img" src="/assets/icons/home.svg" mode="aspectFit"></image>
+      <text>首页</text>
+    </view>
+    <view class="tab-item tab-active">
+      <view class="tab-indicator"></view>
+      <image class="tab-icon-img" src="/assets/icons/import-contacts-active.svg" mode="aspectFit"></image>
+      <text>倒数本</text>
+    </view>
+    <view class="tab-item" bindtap="handleTabMine" hover-class="tab-press">
+      <image class="tab-icon-img" src="/assets/icons/person.svg" mode="aspectFit"></image>
+      <text>我的</text>
+    </view>
+  </view>
+</view>

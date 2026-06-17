@@ -1,0 +1,85 @@
+<view class="page">
+  <view class="nav-shell" style="{{navShellStyle}}">
+    <view class="nav-title" style="{{navActionStyle}}">
+      <text>我的</text>
+    </view>
+    <view class="nav-notify" style="{{notifyStyle}}">
+      <image class="nav-icon" src="/assets/icons/notifications.svg" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <scroll-view class="content" scroll-y enhanced show-scrollbar="{{false}}" style="padding-top: {{contentTop}}px;">
+    <view class="profile">
+      <view class="avatar">
+        <image class="avatar-icon" src="/assets/icons/account-circle.svg" mode="aspectFit"></image>
+      </view>
+      <block wx:if="{{!isLoggedIn}}">
+        <button class="profile-login-btn" open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNumber">
+          <view class="profile-copy">
+            <text class="login-title">登录/注册</text>
+            <text class="login-subtitle">记录每个珍贵时刻</text>
+          </view>
+        </button>
+      </block>
+      <view wx:else class="profile-copy">
+        <text class="login-title">已登录</text>
+        <text class="login-subtitle">{{phoneLabel}}</text>
+      </view>
+    </view>
+
+    <view class="stats-card">
+      <block wx:for="{{stats}}" wx:key="id">
+        <view class="stat-item">
+          <text class="stat-value {{item.primary ? 'stat-primary' : ''}}">{{item.value}}</text>
+          <text class="stat-label">{{item.label}}</text>
+        </view>
+        <view wx:if="{{index < stats.length - 1}}" class="stat-divider"></view>
+      </block>
+    </view>
+
+    <view class="pro-card" hover-class="card-press" hover-stay-time="80">
+      <view class="pro-copy">
+        <text class="pro-title">Pro会员中心</text>
+        <text class="pro-subtitle">解锁无限倒计时与AI智能分类</text>
+      </view>
+      <image class="pro-icon" src="/assets/icons/workspace-premium.svg" mode="aspectFit"></image>
+      <view class="pro-glow"></view>
+    </view>
+
+    <view class="menu-card">
+      <block wx:for="{{menus}}" wx:key="id">
+        <view class="menu-item" bindtap="handleMenuTap" hover-class="menu-press">
+          <view class="menu-left">
+            <view class="menu-icon-wrap">
+              <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
+            </view>
+            <text class="menu-title">{{item.title}}</text>
+          </view>
+          <image class="chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+        </view>
+        <view wx:if="{{index < menus.length - 1}}" class="menu-divider"></view>
+      </block>
+    </view>
+
+    <view class="version">
+      <text>AI 倒计时 v2.4.0</text>
+    </view>
+
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+
+  <view class="tabbar">
+    <view class="tab-item" bindtap="handleTabHome" hover-class="tab-press">
+      <image class="tab-icon-img" src="/assets/icons/home.svg" mode="aspectFit"></image>
+      <text>首页</text>
+    </view>
+    <view class="tab-item" bindtap="handleTabBook" hover-class="tab-press">
+      <image class="tab-icon-img" src="/assets/icons/menu-book.svg" mode="aspectFit"></image>
+      <text>倒数本</text>
+    </view>
+    <view class="tab-item tab-active">
+      <image class="tab-icon-img" src="/assets/icons/person-active.svg" mode="aspectFit"></image>
+      <text>我的</text>
+    </view>
+  </view>
+</view>

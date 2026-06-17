@@ -1,0 +1,156 @@
+<view class="page">
+  <view class="nav-shell" style="{{navShellStyle}}">
+    <view class="nav-action nav-back" style="{{navActionStyle}}" bindtap="handleBack" hover-class="tap-press">
+      <image class="nav-icon" src="/assets/icons/chevron-left.svg" mode="aspectFit"></image>
+    </view>
+    <view class="nav-title" style="{{navActionStyle}}">
+      <text>新建时刻</text>
+    </view>
+    <view class="nav-done" style="{{navActionStyle}}" bindtap="handleDone" hover-class="tap-press">
+      <text>完成</text>
+    </view>
+  </view>
+
+  <view class="content" style="padding-top: {{contentTop}}px;">
+    <view class="ai-card" hover-class="card-press">
+      <view class="ai-glow"></view>
+      <view class="ai-icon-wrap">
+        <image class="ai-icon" src="/assets/icons/auto-awesome-primary.svg" mode="aspectFit"></image>
+      </view>
+      <view class="ai-copy">
+        <text class="ai-title">AI 智能创建</text>
+        <text class="ai-subtitle">描述您的时刻，让 AI 为您打理一切</text>
+      </view>
+      <image class="row-chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+    </view>
+
+    <view class="section">
+      <text class="section-label">第 1 步：基本信息</text>
+      <view class="list-card">
+        <view class="form-row">
+          <text class="row-label fixed-label">时刻名称</text>
+          <input class="event-input" value="{{eventName}}" placeholder="例如：我的生日" placeholder-class="input-placeholder" bindinput="handleNameInput" />
+        </view>
+        <view class="category-block">
+          <text class="row-label">分类选择</text>
+          <view class="category-grid">
+            <view class="category-item {{selectedCategory === item.id ? 'category-active' : ''}}" wx:for="{{categories}}" wx:key="id" data-id="{{item.id}}" bindtap="handleSelectCategory" hover-class="tap-press">
+              <image class="category-icon" src="{{selectedCategory === item.id ? item.activeIcon : item.icon}}" mode="aspectFit"></image>
+              <text>{{item.label}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-label">第 2 步：时间与备注</text>
+      <view class="list-card">
+        <view class="form-row row-between" hover-class="row-press">
+          <text class="row-label">目标日期</text>
+          <view class="row-value">
+            <text class="primary-value">2024年12月25日</text>
+            <image class="small-icon" src="/assets/icons/calendar-month.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="note-row">
+          <text class="row-label">备注</text>
+          <textarea class="note-input" placeholder="记录下这一刻的期待..." placeholder-class="input-placeholder" auto-height="{{false}}" maxlength="80"></textarea>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-label">第 3 步：偏好设置</text>
+      <view class="list-card">
+        <view class="form-row row-between">
+          <text class="row-label">置顶此事件</text>
+          <view class="custom-switch {{pinned ? 'custom-switch-on' : ''}}" bindtap="togglePinned" hover-class="tap-press">
+            <view class="switch-thumb"></view>
+          </view>
+        </view>
+        <view class="form-row row-between" hover-class="row-press">
+          <text class="row-label">定期提醒</text>
+          <view class="row-value muted-value">
+            <text>无</text>
+            <image class="small-chevron" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="fold-section">
+      <view class="fold-head" bindtap="togglePro" hover-class="tap-press">
+        <text class="section-label inline-label">Pro 功能区</text>
+        <text class="pro-tag">PRO</text>
+        <image class="fold-chevron {{proExpanded ? 'fold-open' : ''}}" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+      </view>
+      <view wx:if="{{proExpanded}}" class="list-card pro-card">
+        <view class="icon-block">
+          <view class="icon-head">
+            <text class="row-label strong-label">事件图标选择</text>
+            <image class="small-icon" src="/assets/icons/grid-view.svg" mode="aspectFit"></image>
+          </view>
+          <scroll-view scroll-x show-scrollbar="{{false}}" class="icon-scroll">
+            <view class="icon-options">
+              <view class="icon-choice {{selectedIcon === item.id ? 'icon-choice-active' : ''}}" wx:for="{{iconOptions}}" wx:key="id" data-id="{{item.id}}" bindtap="handleSelectIcon">
+                <image class="choice-icon" src="{{item.icon}}" mode="aspectFit"></image>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="form-row row-between">
+          <text class="row-label">事件主题颜色</text>
+          <view class="color-row">
+            <view class="color-dot color-primary"></view>
+            <view class="color-dot color-orange"></view>
+            <view class="color-dot color-gray"></view>
+            <view class="color-dot color-peach"></view>
+            <image class="small-icon" src="/assets/icons/palette.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="form-row row-between">
+          <text class="row-label">卡片动态效果</text>
+          <view class="row-value muted-value">
+            <text>动态渐变</text>
+            <image class="small-icon" src="/assets/icons/magic-button.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="fold-section">
+      <view class="fold-head" bindtap="toggleBackground" hover-class="tap-press">
+        <text class="section-label inline-label">背景设置</text>
+        <image class="fold-chevron {{backgroundExpanded ? 'fold-open' : ''}}" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+      </view>
+      <view wx:if="{{backgroundExpanded}}" class="list-card background-card">
+        <view class="media-grid">
+          <view class="media-action" hover-class="tap-press">
+            <image class="media-icon" src="/assets/icons/photo-camera.svg" mode="aspectFit"></image>
+            <text>拍照</text>
+          </view>
+          <view class="media-action" hover-class="tap-press">
+            <image class="media-icon" src="/assets/icons/image.svg" mode="aspectFit"></image>
+            <text>相册</text>
+          </view>
+          <view class="media-action" hover-class="tap-press">
+            <image class="media-icon" src="/assets/icons/dashboard.svg" mode="aspectFit"></image>
+            <text>模板</text>
+          </view>
+        </view>
+        <view class="preview-card">
+          <image class="preview-image" src="/assets/create/preview-bg.jpg" mode="aspectFill"></image>
+          <view class="preview-copy">
+            <text class="preview-kicker">预览效果</text>
+            <text class="preview-title">距离 我的生日</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-action">
+    <button class="save-button" bindtap="handleDone" hover-class="save-press">保存时刻</button>
+  </view>
+</view>

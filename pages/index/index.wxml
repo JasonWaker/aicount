@@ -1,89 +1,156 @@
 <view class="page">
-  <view class="nav-shell" style="{{navShellStyle}}">
-    <view class="nav-content" style="{{navContentStyle}}">
-      <view class="brand">
-        <view class="brand-icon" aria-hidden="true"></view>
-        <text class="brand-title">AI倒数日</text>
+  <view class="content" style="padding-top: {{contentTop}}px;">
+    <view class="nav-shell" style="{{navShellStyle}}">
+      <view class="nav-content" style="{{navContentStyle}}">
+        <view class="brand">
+          <image class="brand-icon-img" src="/assets/icons/calendar-today.svg" mode="aspectFit"></image>
+          <text class="brand-title">AI倒数日</text>
+        </view>
+      </view>
+      <view class="nav-subtitle" style="{{navSubtitleStyle}}">
+        <text>记录重要时刻，让等待更有意义</text>
       </view>
     </view>
+
+    <block wx:if="{{!isLoggedIn}}">
+      <view class="guest-hero-card">
+        <image class="guest-hero-image" src="/assets/lantern.jpg" mode="aspectFill"></image>
+        <view class="guest-hero-shade"></view>
+        <view class="guest-hero-body">
+          <view class="guest-hero-top">
+            <text class="guest-pin-chip">置顶</text>
+            <image class="guest-star-icon-img" src="/assets/icons/star-filled.svg" mode="aspectFit"></image>
+          </view>
+
+          <view class="guest-hero-main">
+            <text class="guest-hero-title">2026年春节</text>
+            <view class="guest-hero-count">
+              <text class="guest-hero-number">{{guestDaysLeft}}</text>
+              <text class="guest-hero-unit">天后</text>
+            </view>
+            <view class="guest-hero-date">
+              <image class="guest-date-icon-img" src="/assets/icons/event-white.svg" mode="aspectFit"></image>
+              <text>{{guestDateText}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section-head">
+        <text class="section-title">近期重要节日</text>
+        <view class="section-link tap-target" bindtap="handleViewAll">
+          <text>查看全部</text>
+          <image class="chevron-icon-img" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+        </view>
+      </view>
+
+      <view class="guest-event-list">
+        <view class="guest-event-card" wx:for="{{events}}" wx:key="id" hover-class="guest-event-card-active" hover-stay-time="80">
+          <view class="guest-event-main">
+            <view class="guest-event-icon {{item.featured ? 'guest-event-icon-featured' : ''}}">
+              <image class="guest-event-icon-img" src="{{item.iconSrc}}" mode="aspectFit"></image>
+            </view>
+            <view class="guest-event-copy">
+              <text class="guest-event-title">{{item.title}}</text>
+              <text class="guest-event-date">{{item.dateText}}</text>
+            </view>
+          </view>
+          <view class="guest-event-count">
+            <text class="guest-event-number {{item.featured ? 'guest-event-number-featured' : ''}}">{{item.daysLeft}}</text>
+            <text class="guest-event-unit">天</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="hero-card">
+      <image class="hero-image" src="/assets/home/hero-anniversary.jpg" mode="aspectFill"></image>
+      <view class="hero-dark"></view>
+      <view class="hero-glass">
+        <view class="hero-top">
+          <view>
+            <view class="pin-chip">
+              <image class="pin-icon-img" src="/assets/icons/push-pin-white.svg" mode="aspectFit"></image>
+              <text>置顶</text>
+            </view>
+            <text class="hero-title">结婚纪念日</text>
+          </view>
+          <image class="hero-favorite" src="/assets/icons/favorite.svg" mode="aspectFit"></image>
+        </view>
+
+        <view class="hero-count">
+          <text class="hero-number">{{mainDaysLeft}}</text>
+          <text class="hero-unit">天后</text>
+        </view>
+
+        <view class="hero-date">
+          <image class="hero-date-icon" src="/assets/icons/calendar-today.svg" mode="aspectFit"></image>
+          <text>{{mainDateText}}</text>
+        </view>
+
+        <view class="hero-quote">
+          <image class="quote-icon-img" src="/assets/icons/auto-awesome-primary.svg" mode="aspectFit"></image>
+          <text>“愿此时光如酒，待相拥时已至醇香。”</text>
+        </view>
+      </view>
+      </view>
+
+      <view class="section-head">
+        <text class="section-title">所有计划</text>
+        <view class="section-link tap-target" bindtap="handleViewAll">
+          <text>查看全部</text>
+          <image class="chevron-icon-img" src="/assets/icons/chevron-right.svg" mode="aspectFit"></image>
+        </view>
+      </view>
+
+      <view class="plan-list">
+        <view class="plan-card" wx:for="{{plans}}" wx:key="id" hover-class="plan-card-active" hover-stay-time="80">
+          <view wx:if="{{item.image}}" class="plan-thumb">
+            <image class="plan-image" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="thumb-shade"></view>
+          </view>
+          <view wx:else class="plan-thumb plan-thumb-empty">
+            <image class="plan-placeholder-icon" src="{{item.iconSrc}}" mode="aspectFit"></image>
+          </view>
+
+          <view class="plan-main">
+            <view class="plan-top">
+              <text class="plan-category {{item.featured ? 'plan-category-featured' : ''}}">{{item.category}}</text>
+              <view class="plan-right">
+                <view class="plan-count">
+                  <text class="plan-number {{item.featured ? 'plan-number-featured' : ''}}">{{item.daysLeft}}</text>
+                  <text class="plan-unit">天后</text>
+                </view>
+                <view class="progress-track">
+                  <view class="progress-fill" style="width: {{item.progress}}%;"></view>
+                </view>
+              </view>
+            </view>
+            <text class="plan-title">{{item.title}}</text>
+            <text class="plan-quote">{{item.quote}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
   </view>
 
-  <scroll-view class="content" scroll-y enhanced show-scrollbar="{{false}}" style="padding-top: {{contentTop}}px;">
-    <view class="intro">
-      <text class="intro-copy">记录重要时刻，让等待更有意义</text>
-    </view>
-
-    <view class="hero-card">
-      <image class="hero-image" src="/assets/lantern.jpg" mode="aspectFill"></image>
-      <view class="hero-shade"></view>
-      <view class="hero-body">
-        <view class="hero-top">
-          <text class="pin-chip">置顶</text>
-          <text class="star">★</text>
-        </view>
-        <view class="hero-main">
-          <text class="hero-title">2026年春节</text>
-          <view class="hero-count">
-            <text class="hero-number">{{mainDaysLeft}}</text>
-            <text class="hero-unit">天后</text>
-          </view>
-          <view class="hero-date">
-            <view class="date-icon"></view>
-            <text>2026年2月17日</text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="section-head">
-      <text class="section-title">近期重要节日</text>
-      <button class="section-link tap-target" bindtap="handleViewAll">查看全部</button>
-    </view>
-
-    <view class="event-list">
-      <view class="event-card" wx:for="{{events}}" wx:key="id" hover-class="event-card-active" hover-stay-time="80">
-        <view class="event-main">
-          <view class="event-icon {{item.featured ? 'event-icon-featured' : ''}}">
-            <view class="event-symbol event-symbol-{{item.icon}}"></view>
-          </view>
-          <view class="event-copy">
-            <text class="event-title">{{item.title}}</text>
-            <text class="event-date">{{item.dateText}}</text>
-          </view>
-        </view>
-        <view class="event-count">
-          <text class="event-number {{item.featured ? 'event-number-featured' : ''}}">{{item.daysLeft}}</text>
-          <text class="event-unit">天</text>
-        </view>
-      </view>
-    </view>
-
-    <view class="empty-hint">
-      <view class="empty-icon">
-        <view class="empty-line empty-line-one"></view>
-        <view class="empty-line empty-line-two"></view>
-        <view class="empty-line empty-line-three"></view>
-      </view>
-      <text class="empty-text">向下滑动发现更多灵感</text>
-    </view>
-  </scroll-view>
-
-  <button class="fab tap-target" bindtap="handleAddCountdown" hover-class="fab-active">
-    <text class="fab-icon">+</text>
-    <text>添加我的倒数日</text>
-  </button>
+  <view class="fab" bindtap="handleAddCountdown" hover-class="fab-active">
+    <image class="fab-icon-img" src="/assets/icons/add-white.svg" mode="aspectFit"></image>
+  </view>
 
   <view class="tabbar">
     <view class="tab-item tab-active">
-      <view class="tab-icon tab-home"><view class="tab-home-door"></view></view>
+      <image class="tab-icon-img" src="/assets/icons/home-active.svg" mode="aspectFit"></image>
       <text>首页</text>
     </view>
-    <view class="tab-item">
-      <view class="tab-icon tab-book"></view>
+    <view class="tab-item" bindtap="handleTabBook" hover-class="tab-item-active">
+      <image class="tab-icon-img" src="/assets/icons/book.svg" mode="aspectFit"></image>
       <text>倒数本</text>
     </view>
-    <view class="tab-item">
-      <view class="tab-icon tab-user"></view>
+    <view class="tab-item" bindtap="handleTabMine" hover-class="tab-item-active">
+      <image class="tab-icon-img" src="/assets/icons/person.svg" mode="aspectFit"></image>
       <text>我的</text>
     </view>
   </view>

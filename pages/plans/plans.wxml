@@ -1,0 +1,58 @@
+<view class="page">
+  <view class="nav-shell" style="{{navShellStyle}}">
+    <view class="nav-content" style="{{navContentStyle}}">
+      <button class="back-button tap-target" bindtap="handleBack" hover-class="button-active" aria-label="返回">
+        <view class="back-icon"></view>
+      </button>
+      <text class="nav-title">所有计划</text>
+    </view>
+  </view>
+
+  <view class="filter-shell" style="top: {{contentTop}}px;">
+      <scroll-view class="filter-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+        <view class="chip-row">
+          <view
+            class="chip {{activeCategory === item ? 'chip-active' : ''}}"
+            wx:for="{{categories}}"
+            wx:key="*this"
+            data-category="{{item}}"
+            bindtap="handleCategoryTap"
+            hover-class="chip-press"
+          >{{item}}</view>
+        </view>
+      </scroll-view>
+    </view>
+
+  <scroll-view class="content" scroll-y enhanced show-scrollbar="{{false}}" style="padding-top: {{contentTop}}px;">
+    <view class="plans-list">
+      <view class="plan-card" wx:for="{{plans}}" wx:key="id" hover-class="plan-card-active" hover-stay-time="80">
+        <view class="thumb-wrap">
+          <image class="thumb" src="{{item.image}}" mode="aspectFill"></image>
+        </view>
+
+        <view class="plan-copy">
+          <view class="title-row">
+            <text wx:if="{{item.pinned}}" class="pin-badge">置顶</text>
+            <text class="plan-title">{{item.title}}</text>
+          </view>
+          <text class="plan-quote">{{item.quote}}</text>
+        </view>
+
+        <view class="count-wrap">
+          <view class="count-line">
+            <text class="count-prefix">还有</text>
+            <text class="count-number count-{{item.tone}}">{{item.days}}</text>
+            <text class="count-unit">天</text>
+          </view>
+          <text class="count-note">{{item.note}}</text>
+        </view>
+      </view>
+
+      <view class="bottom-spacer"></view>
+    </view>
+  </scroll-view>
+
+  <view class="add-fab" bindtap="handleAddPlan" hover-class="add-fab-active" aria-label="添加">
+    <text class="add-icon">+</text>
+  </view>
+</view>

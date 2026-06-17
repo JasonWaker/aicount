@@ -1,6 +1,10 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/create/create",
+    "pages/plans/plans",
+    "pages/book/book",
+    "pages/mine/mine"
   ],
   "window": {
     "navigationStyle": "custom",
